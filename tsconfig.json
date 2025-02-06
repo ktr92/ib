@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    //"strictNullChecks": true,
+
+    "strict": false,
+    "module": "es6",
+    "target": "es6",
+    "jsx": "react",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src"],
+      "*": ["types/*.d.ts"]
+    },
+    "lib": [
+      "es2019",
+      "dom",
+      "dom.iterable"
+    ]
+
+  }
+}
