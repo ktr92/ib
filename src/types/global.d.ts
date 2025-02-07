@@ -15,6 +15,7 @@ declare interface IPosition {
   posID: string
   posPortfoliID: string
   posTicker: string
+  posIsin: string
   posType: instrument
   posMarket: markets
   posPrice: number
