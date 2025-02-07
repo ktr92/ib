@@ -26,8 +26,6 @@ Mutations.initMarketPrice = function(prices: IPrice[], clPrices: IClosePrice[]) 
       market.closePrice = closePrices.closeprice
     })
   })
-
-  console.log(this.portfolio)
 }
 
 export default Mutations

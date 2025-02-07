@@ -17,6 +17,8 @@ Actions.initPrices = async function() {
   const instruments = await getPricesbyIsins(tickers)
   const closePrices = await getClosePrices(tickers)
   Mutations.initMarketPrice(instruments, closePrices)
+
+  console.log(this.portfolio[1].markets[0])
 }
 
 export default Actions

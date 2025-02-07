@@ -1,7 +1,6 @@
-import axios from 'axios'
 import quotation2decimal from '../utils/quotation2decimal'
-const API_URL = process.env.API_URL
-const token = process.env.API_TOKEN
+import sendRequest from './marketDataService'
+
 /**
  * функция для получения цены закрытия (вчерашней)
  * @see https://russianinvestments.github.io/investAPI/swagger-ui/#/MarketDataService/MarketDataService_GetClosePrices
@@ -60,31 +59,19 @@ const getClosePrices = async (figislist) => {
       }
     })
 
-    const response = await axios(
-        API_URL +
-        '/tinkoff.public.invest.api.contract.v1.MarketDataService/GetClosePrices',
-        {
-          data: {
-            'instruments': formatFigiList, // Ищем по figi
-            'instrumentStatus': 'INSTRUMENT_STATUS_UNSPECIFIED'
-          },
-          method: 'post',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-    )
-    if (response.data.closePrices.length > 0) {
-      const result = response.data.closePrices.map(item => {
-        return {
-          closeprice: quotation2decimal(item.eveningSessionPrice ? item.eveningSessionPrice : item.price),
-          ...item
-        }
-      })
-      return result
-    } else {
-      return null
+    const requestData = {
+      'instruments': formatFigiList, // Ищем по figi
+      'instrumentStatus': 'INSTRUMENT_STATUS_UNSPECIFIED'
     }
+
+    const fetchData = await sendRequest('GetClosePrices', requestData, 'closePrices', (item) => {
+      return {
+        closeprice: quotation2decimal(item.eveningSessionPrice ? item.eveningSessionPrice : item.price),
+        ...item
+      }
+    })
+
+    return fetchData
   } catch (error) {
     console.error('Error fetching instrumentId:', error)
     return null

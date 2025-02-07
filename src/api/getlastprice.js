@@ -1,6 +1,8 @@
 
 import axios from 'axios'
 import quotation2decimal from '../utils/quotation2decimal'
+import sendRequest from './marketDataService'
+
 const API_URL = process.env.API_URL
 const token = process.env.API_TOKEN
 /**
@@ -24,32 +26,21 @@ const token = process.env.API_TOKEN
 const getPricesbyIsins = async (figislist) => {
   try {
     figislist = figislist.filter(item => !!item)
-    const response = await axios(
-        API_URL +
-          '/tinkoff.public.invest.api.contract.v1.MarketDataService/GetLastPrices',
-        {
-          data: {
-            instrumentId: figislist, // Ищем по figi
-            lastPriceType: 'LAST_PRICE_UNSPECIFIED',
-            instrumentStatus: 'INSTRUMENT_STATUS_UNSPECIFIED',
-          },
-          method: 'post',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-    )
-    if (response.data.lastPrices.length > 0) {
-      const result = response.data.lastPrices.map(item => {
-        return {
-          lastprice: quotation2decimal(item.price),
-          ...item
-        }
-      })
-      return result
-    } else {
-      return null
+
+    const requestData = {
+      instrumentId: figislist, // Ищем по figi
+      lastPriceType: 'LAST_PRICE_UNSPECIFIED',
+      instrumentStatus: 'INSTRUMENT_STATUS_UNSPECIFIED',
     }
+
+    const fetchData = await sendRequest('GetLastPrices', requestData, 'lastPrices', (item) => {
+      return {
+        lastprice: quotation2decimal(item.price),
+        ...item
+      }
+    })
+
+    return fetchData
   } catch (error) {
     console.error('Error fetching instrumentId:', error)
     return null
