@@ -27,6 +27,7 @@ declare interface IPosition {
   posNominal?: number
   posCurrencyPrice?: number,
   marketPrice?: number
+  closePrice?: number
 }
 declare interface IPortfolio {
   id: string

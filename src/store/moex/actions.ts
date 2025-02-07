@@ -1,8 +1,9 @@
-import getIdbyTickers from '../../api/getidbyticker';
+import getIdbyTickers from '../../api/getidbyisin';
 import {stateData} from '.';
 import Getters from './getters';
 import getPricesbyIsins from '../../api/getlastprice';
 import Mutations from './mutations';
+import getClosePrices from '../../api/getcloseprice';
 
 const Actions = Object.create(stateData)
 
@@ -11,23 +12,11 @@ Actions.addPosition = function(portfolio: string, position: IPosition) {
   portf.markets.push(position)
 }
 
-interface IMarketData extends IPosition {
-  marketPrice: number
-}
-
 Actions.initPrices = async function() {
   const tickers = Getters.getTypes()
   const instruments = await getPricesbyIsins(tickers)
-  Mutations.initMarketPrice(instruments)
-  console.log(this.portfolio)
-
-  /* const marketData = instruments.map(item => {
-    return {
-      lastprice: item.lastprice,
-      figi: item.figi
-    }
-  }) */
-  return instruments
+  const closePrices = await getClosePrices(tickers)
+  Mutations.initMarketPrice(instruments, closePrices)
 }
 
 export default Actions
