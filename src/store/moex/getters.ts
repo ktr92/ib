@@ -14,7 +14,7 @@ Getters.getPortfolioById = function(id: string) {
 Getters.getTypes = function() {
   this.isins = []
   this.portfolio.forEach((element: IPortfolio) => {
-    const tlist = element.markets.map(item => item.posIsin)
+    const tlist = element.markets.map(item => item.posFigi)
     this.isins.push(...tlist)
   });
   return this.isins

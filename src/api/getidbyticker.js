@@ -36,7 +36,6 @@ const getIdbyIsins = async (isins) => {
       )
 
       // Обрабатываем ответ,  если найдена хотя бы одна акция
-
       if (response.data.instruments.length > 0) {
         return response.data.instruments
       } else {

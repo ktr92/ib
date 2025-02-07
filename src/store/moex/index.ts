@@ -19,7 +19,8 @@ export const stateData: IStateData = {
           posMarket: 'TQBR',
           posPrice: 0.567,
           posCount: 416000,
-          posArchive: []
+          posArchive: [],
+          posFigi: 'BBG00475K2X9'
         }
       ]
     },
@@ -38,6 +39,7 @@ export const stateData: IStateData = {
           posMarket: 'TQCB',
           posPrice: 510,
           posCount: 178,
+          posFigi: 'RU000A106T36'
         },
         {
           posID: '3',
@@ -48,6 +50,7 @@ export const stateData: IStateData = {
           posMarket: 'TQCB',
           posPrice: 42,
           posCount: 1000,
+          posFigi: 'BBG004S681M2'
         },
       ]
     },
@@ -71,6 +74,7 @@ export const stateData: IStateData = {
           posNominal: 1000,
           posCurrency: 'USD',
           posCurrencyPrice: 90,
+          posFigi: 'TCSS0A105A95'
         },
         {
           posID: '7',
@@ -86,6 +90,7 @@ export const stateData: IStateData = {
           posNominal: 1000,
           posCurrency: 'USD',
           posCurrencyPrice: 92,
+          posFigi: 'TCS00A107B43'
         },
         {
           posID: '8',
@@ -100,6 +105,7 @@ export const stateData: IStateData = {
           posNominal: 1000,
           posCurrency: 'USD',
           posCurrencyPrice: 88,
+          posFigi: 'TCS00A107B43'
         },
 
         {
@@ -114,6 +120,7 @@ export const stateData: IStateData = {
           posNominal: 1000,
           posCurrency: '',
           posNKD: 7,
+          posFigi: 'BBG011FJ4HS6'
         },
       ],
 
